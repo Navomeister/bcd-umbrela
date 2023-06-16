@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/06/2023 às 22:24
+-- Tempo de geração: 16/06/2023 às 21:51
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -204,6 +204,38 @@ INSERT INTO `buyer` (`buyerId`, `user_id`) VALUES
 (9, 56),
 (10, 66),
 (8, 85);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `comments`
+--
+
+CREATE TABLE `comments` (
+  `idComm` int(11) NOT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `productId` int(11) DEFAULT NULL,
+  `creationTime` datetime NOT NULL,
+  `grade` float(2,1) DEFAULT NULL,
+  `content` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `comments`
+--
+
+INSERT INTO `comments` (`idComm`, `userid`, `productId`, `creationTime`, `grade`, `content`) VALUES
+(6, 1, 1, '2017-02-21 00:00:00', 4.3, 'The laptop works amazingly. It holds a 10 hour charge, is compact to wander with, the brightness/volume features are perfect.'),
+(7, 1, 2, '2016-09-18 00:00:00', 4.6, 'These headphones are worth the money, yes even the CAD price. They sound good and the noise cancellation is incredible.'),
+(8, 4, 3, '2014-03-22 00:00:00', 4.7, 'Someone always has a better camera. That being said, this is an admirable performer with enough features for most.'),
+(9, 4, 4, '2017-01-23 00:00:00', 4.8, 'This monitor is simply amazing. My eyes are not getting any younger and this makes everything very crisp and clear. I can definitely notice the improvement over a 2560X1440 display. I am ordering another one!'),
+(10, 3, 5, '2016-12-27 00:00:00', 4.3, 'It is the first Go Pro I have had and so far I am loving it, the voice control is great for when you have your hands busy or can not reach the buttons. The apps for camera pairing and video editing are just great as well'),
+(11, 5, 6, '2015-05-30 00:00:00', 4.5, 'Works flawlessly. After plugging it in, Windows automatically installed the drivers for it, and it was working in a matter of moments. It is an actual Xbox controller so it feels solid. This was definitely a purchase I would make again.'),
+(12, 2, 7, '2017-02-12 00:00:00', 4.3, 'Overall good keyboard and mouse. However the moment your USB receiver dies, the whole thing goes in the garbage.'),
+(13, 2, 8, '2016-12-27 00:00:00', 3.8, 'I love my surface. I got it a couple of weeks ago. I amm a life time mac user, but I consider myself quite tech savvy. I think this is a great device.'),
+(14, 4, 2, '2015-05-30 00:00:00', 4.3, 'I have been using it for a week now. For a short conclusion, i love the headset.'),
+(15, 3, 1, '2015-08-22 00:00:00', 5.0, 'This was definitely an impulse buy on my part but has turned out to be one of the best things I have ever invested in for school!'),
+(16, 5, 5, '2015-08-22 00:00:00', 5.0, 'First go pro I have ever purchased. Really impressed with the quality and ease of use. The stabilizer is awesome, do not need to warp stabilize a ton in adobe.');
 
 -- --------------------------------------------------------
 
@@ -425,6 +457,32 @@ INSERT INTO `seller` (`sellerId`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `service_point`
+--
+
+CREATE TABLE `service_point` (
+  `serviceId` int(11) NOT NULL,
+  `streetAddr` varchar(250) DEFAULT NULL,
+  `province` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `startTime` varchar(50) DEFAULT NULL,
+  `endTime` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `service_point`
+--
+
+INSERT INTO `service_point` (`serviceId`, `streetAddr`, `province`, `city`, `startTime`, `endTime`) VALUES
+(9, '27 St Catherine Street', 'Quebec', 'Quebec City', '10:00 am', '5:30 pm'),
+(19, '1099 University street', 'Quebec', 'Montreal', '10:00 am', '5:30 pm'),
+(27, '2045 Sanguinet Street', 'Quebec', 'Montreal', '10:00 am', '5:30 pm'),
+(34, '45 St Denis Street', 'Quebec', 'Montreal', '10:00 am', '6:00 pm'),
+(72, '37 Sherbrook Street', 'Quebec', 'Montreal', '9:30 am', '5:30 pm');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `store`
 --
 
@@ -593,6 +651,14 @@ ALTER TABLE `buyer`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Índices de tabela `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`idComm`),
+  ADD KEY `userid` (`userid`),
+  ADD KEY `productId` (`productId`);
+
+--
 -- Índices de tabela `contain`
 --
 ALTER TABLE `contain`
@@ -669,6 +735,12 @@ ALTER TABLE `seller`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Índices de tabela `service_point`
+--
+ALTER TABLE `service_point`
+  ADD PRIMARY KEY (`serviceId`);
+
+--
 -- Índices de tabela `store`
 --
 ALTER TABLE `store`
@@ -701,6 +773,12 @@ ALTER TABLE `bank_card`
 --
 ALTER TABLE `buyer`
   MODIFY `buyerId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT de tabela `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `idComm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de tabela `credit_card`
@@ -739,6 +817,12 @@ ALTER TABLE `seller`
   MODIFY `sellerId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT de tabela `service_point`
+--
+ALTER TABLE `service_point`
+  MODIFY `serviceId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+
+--
 -- AUTO_INCREMENT de tabela `store`
 --
 ALTER TABLE `store`
@@ -771,6 +855,13 @@ ALTER TABLE `bank_card`
 --
 ALTER TABLE `buyer`
   ADD CONSTRAINT `buyer_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`userId`);
+
+--
+-- Restrições para tabelas `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `buyer` (`buyerId`),
+  ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`);
 
 --
 -- Restrições para tabelas `contain`
